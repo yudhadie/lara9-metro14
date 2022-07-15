@@ -47,7 +47,7 @@
                         </div>
                     </div>
                     <div class="card-footer d-flex justify-content-end py-6 px-9">
-                        <button data-bs-dismiss="modal" id="modal_form_cancel" class="btn btn-light me-3">Cancel</button>
+                        <button type="button" class="btn btn-light me-3" data-bs-dismiss="modal"> Close </button>
                         <button type="submit" id="modal_form_submit" class="btn btn-primary">
                             <span class="indicator-label">Submit</span>
                             <span class="indicator-progress">Please wait...

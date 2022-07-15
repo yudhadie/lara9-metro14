@@ -173,7 +173,7 @@
         );
 
         // Submit button handler
-        const submitButton = document.getElementById('modal_form_form');
+        const submitButton = document.getElementById('modal_form_submit');
         submitButton.addEventListener('click', function (e) {
             e.preventDefault();
             if (validator) {
