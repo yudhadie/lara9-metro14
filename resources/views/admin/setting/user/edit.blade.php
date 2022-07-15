@@ -81,7 +81,11 @@
                     </div>
                     <div class="card-footer d-flex justify-content-end py-6 px-9">
                         <a class="btn btn-light btn-active-light-primary me-2" href="{{route('user.index')}}">Discard</a>
-                        <button type="submit" class="btn btn-primary" id="kt_account_profile_details_submit">Save Changes</button>
+                        <button type="submit" id="modal_form_submit" class="btn btn-primary">
+                            <span class="indicator-label">Submit</span>
+                            <span class="indicator-progress">Please wait...
+                            <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+                        </button>
                     </div>
                 </form>
             </div>
@@ -110,7 +114,11 @@
                         </div>
                     </div>
                     <div class="card-footer d-flex justify-content-end py-6 px-9">
-                        <button type="submit" class="btn btn-primary" id="kt_account_modal_form_password">Save Changes</button>
+                        <button type="submit" id="modal_form_submit2" class="btn btn-primary">
+                            <span class="indicator-label">Submit</span>
+                            <span class="indicator-progress">Please wait...
+                            <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+                        </button>
                     </div>
                 </form>
             </div>
@@ -161,22 +169,22 @@
     );
 
     // Submit button handler
-    const submitButton = document.getElementById('modal_form_form');
+    const submitButton = document.getElementById('modal_form_submit');
     submitButton.addEventListener('click', function (e) {
         e.preventDefault();
         if (validator) {
             validator.validate().then(function (status) {
                 console.log('validated!');
-            //     if (status == 'Valid') {
-            //         submitButton.setAttribute('data-kt-indicator', 'on');
-            //         submitButton.disabled = true;
-            //         setTimeout(function () {
-            //             submitButton.removeAttribute('data-kt-indicator');
-            //             submitButton.disabled = false;
-            //             form.submit();
-            //         }, 2000);
-            //     }
-            // });
+                if (status == 'Valid') {
+                    submitButton.setAttribute('data-kt-indicator', 'on');
+                    submitButton.disabled = true;
+                    setTimeout(function () {
+                        submitButton.removeAttribute('data-kt-indicator');
+                        submitButton.disabled = false;
+                        form.submit();
+                    }, 2000);
+                }
+            });
         }
     });
 </script>
@@ -208,7 +216,7 @@
     );
 
     // Submit button handler
-    const submitButton2 = document.getElementById('modal_form_password');
+    const submitButton2 = document.getElementById('modal_form_submit2');
     submitButton2.addEventListener('click', function (e) {
         e.preventDefault();
         if (validator2) {
