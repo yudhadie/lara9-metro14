@@ -1,7 +1,7 @@
 <head>
-    <title>JJPromotion</title>
+    <title>Triton Creative</title>
     <meta charset="utf-8" />
-    <meta name="description" content="JJPromotion" />
+    <meta name="description" content="tritoncreative" />
     <meta name="keywords" content="" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="shortcut icon" href="{{ asset('assets/media/logos/favicon.png') }}" />

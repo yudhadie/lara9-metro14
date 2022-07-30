@@ -15,7 +15,7 @@
                 <form id="modal_form_form" class="form" action="{{ route('user.store') }}" method="post" >
                     {{ csrf_field() }} {{ method_field('POST') }}
                     <div class="mb-13 text-center">
-                        <h1 class="mb-3">Add Users</h1>
+                        <h1 class="mb-3">Add {{$tittle ?? ''}}</h1>
                     </div>
                     <div class="d-flex flex-column mb-8 fv-row">
                         <label class="d-flex align-items-center fs-6 fw-bold mb-2">
