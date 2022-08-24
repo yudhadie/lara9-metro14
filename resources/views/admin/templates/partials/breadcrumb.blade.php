@@ -5,7 +5,7 @@
 
             {{-- Dashboard --}}
             @if (request()->is('dashboard'))
-                <li class="breadcrumb-item text-gray-600">Dashboard</li>
+                <li class="breadcrumb-item text-gray-600"><a class="text-gray-600" href="http://">aaa</a></li>
             @elseif (request()->is('dashboard/*'))
                 <li class="breadcrumb-item text-gray-600">Dashboard</li>
             @else
@@ -30,11 +30,4 @@
 
         </ul>
     </div>
-
-    {{-- <div class="d-flex align-items-center py-2 py-md-1">
-        <!--begin::Button-->
-        <a href="#" class="btn btn-dark fw-bolder" data-bs-toggle="modal" data-bs-target="#kt_modal_create_app" id="kt_toolbar_primary_button">Create</a>
-        <!--end::Button-->
-    </div> --}}
-
 </div>

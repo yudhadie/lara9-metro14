@@ -4,6 +4,13 @@
 
 @include('admin.templates.partials.head-alert')
 
+    <div class="toolbar mb-5 mb-lg-7" id="kt_toolbar">
+        <div class="page-title d-flex flex-column me-3">
+            <h1 class="d-flex text-dark fw-bolder my-1 fs-3">{{$title ?? ''}}</h1>
+            {{ Breadcrumbs::render('edituser',$user) }}
+        </div>
+    </div>
+
     <div class="content flex-column-fluid" id="kt_content">
         <div class="card mb-5 mb-xl-10">
             <div class="card-header border-0 cursor-pointer" role="button" data-bs-toggle="collapse" data-bs-target="#kt_account_profile_details" aria-expanded="true" aria-controls="kt_account_profile_details">
@@ -125,113 +132,118 @@
 @endsection
 
 @push('scripts')
-<script>
-    const form = document.getElementById('modal_form_form');
-    var validator = FormValidation.formValidation(
-        form,
-        {
-            fields: {
-                'name': {
-                    validators: {
-                        notEmpty: {
-                            message: 'Silahkan isi nama!'
+    <script>
+        var element = document.getElementById('menu_setting');
+            element.classList.add('show');
+        var element2 = document.getElementById('menu_user');
+            element2.classList.add('active');
+    </script>
+    <script>
+        const form = document.getElementById('modal_form_form');
+        var validator = FormValidation.formValidation(
+            form,
+            {
+                fields: {
+                    'name': {
+                        validators: {
+                            notEmpty: {
+                                message: 'Silahkan isi nama!'
+                            }
                         }
-                    }
-                },
-                'email': {
-                    validators: {
-                        notEmpty: {
-                            message: 'Silahkan isi dengan format email!'
+                    },
+                    'email': {
+                        validators: {
+                            notEmpty: {
+                                message: 'Silahkan isi dengan format email!'
+                            }
                         }
-                    }
-                },
-                'current_team_id': {
-                    validators: {
-                        notEmpty: {
-                            message: 'Silahkan Pilih Role!'
+                    },
+                    'current_team_id': {
+                        validators: {
+                            notEmpty: {
+                                message: 'Silahkan Pilih Role!'
+                            }
                         }
-                    }
+                    },
                 },
-            },
 
-            plugins: {
-                trigger: new FormValidation.plugins.Trigger(),
-                bootstrap: new FormValidation.plugins.Bootstrap5({
-                    rowSelector: '.fv-row',
-                    eleInvalidClass: '',
-                    eleValidClass: ''
-                })
-            }
-        }
-    );
-
-    // Submit button handler
-    const submitButton = document.getElementById('modal_form_submit');
-    submitButton.addEventListener('click', function (e) {
-        e.preventDefault();
-        if (validator) {
-            validator.validate().then(function (status) {
-                console.log('validated!');
-                if (status == 'Valid') {
-                    submitButton.setAttribute('data-kt-indicator', 'on');
-                    submitButton.disabled = true;
-                    setTimeout(function () {
-                        submitButton.removeAttribute('data-kt-indicator');
-                        submitButton.disabled = false;
-                        form.submit();
-                    }, 2000);
+                plugins: {
+                    trigger: new FormValidation.plugins.Trigger(),
+                    bootstrap: new FormValidation.plugins.Bootstrap5({
+                        rowSelector: '.fv-row',
+                        eleInvalidClass: '',
+                        eleValidClass: ''
+                    })
                 }
-            });
-        }
-    });
-</script>
-
-<script>
-    const form2 = document.getElementById('modal_form_password');
-    var validator2 = FormValidation.formValidation(
-        form2,
-        {
-            fields: {
-                'password': {
-                    validators: {
-                        notEmpty: {
-                            message: 'Silahkan isi password!'
-                        }
-                    }
-                },
-            },
-
-            plugins: {
-                trigger: new FormValidation.plugins.Trigger(),
-                bootstrap: new FormValidation.plugins.Bootstrap5({
-                    rowSelector: '.fv-row',
-                    eleInvalidClass: '',
-                    eleValidClass: ''
-                })
             }
-        }
-    );
+        );
 
-    // Submit button handler
-    const submitButton2 = document.getElementById('modal_form_submit2');
-    submitButton2.addEventListener('click', function (e) {
-        e.preventDefault();
-        if (validator2) {
-            validator2.validate().then(function (status) {
-                console.log('validated2!');
-                if (status == 'Valid') {
-                    submitButton2.setAttribute('data-kt-indicator', 'on');
-                    submitButton2.disabled = true;
-                    setTimeout(function () {
-                        submitButton2.removeAttribute('data-kt-indicator');
-                        submitButton2.disabled = false;
-                        form2.submit();
-                    }, 2000);
+        // Submit button handler
+        const submitButton = document.getElementById('modal_form_submit');
+        submitButton.addEventListener('click', function (e) {
+            e.preventDefault();
+            if (validator) {
+                validator.validate().then(function (status) {
+                    console.log('validated!');
+                    if (status == 'Valid') {
+                        submitButton.setAttribute('data-kt-indicator', 'on');
+                        submitButton.disabled = true;
+                        setTimeout(function () {
+                            submitButton.removeAttribute('data-kt-indicator');
+                            submitButton.disabled = false;
+                            form.submit();
+                        }, 2000);
+                    }
+                });
+            }
+        });
+    </script>
+
+    <script>
+        const form2 = document.getElementById('modal_form_password');
+        var validator2 = FormValidation.formValidation(
+            form2,
+            {
+                fields: {
+                    'password': {
+                        validators: {
+                            notEmpty: {
+                                message: 'Silahkan isi password!'
+                            }
+                        }
+                    },
+                },
+
+                plugins: {
+                    trigger: new FormValidation.plugins.Trigger(),
+                    bootstrap: new FormValidation.plugins.Bootstrap5({
+                        rowSelector: '.fv-row',
+                        eleInvalidClass: '',
+                        eleValidClass: ''
+                    })
                 }
-            });
-        }
-    });
-</script>
+            }
+        );
 
+        // Submit button handler
+        const submitButton2 = document.getElementById('modal_form_submit2');
+        submitButton2.addEventListener('click', function (e) {
+            e.preventDefault();
+            if (validator2) {
+                validator2.validate().then(function (status) {
+                    console.log('validated2!');
+                    if (status == 'Valid') {
+                        submitButton2.setAttribute('data-kt-indicator', 'on');
+                        submitButton2.disabled = true;
+                        setTimeout(function () {
+                            submitButton2.removeAttribute('data-kt-indicator');
+                            submitButton2.disabled = false;
+                            form2.submit();
+                        }, 2000);
+                    }
+                });
+            }
+        });
+    </script>
 
 @endpush
