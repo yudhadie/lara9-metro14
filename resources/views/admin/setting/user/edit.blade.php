@@ -2,27 +2,7 @@
 
 @section('content')
 
-    @if ($errors->any())
-    <div class="alert alert-dismissible bg-danger d-flex flex-column flex-sm-row p-5">
-        <div class="d-flex flex-column text-light pe-0 pe-sm-10">
-            <div class="row justify-content-md-center">
-                <div class="col-lg-8 text-center">
-                    @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-                </div>
-            </div>
-        </div>
-        <button type="button" class="position-absolute position-sm-relative m-2 m-sm-0 top-0 end-0 btn btn-icon ms-sm-auto" data-bs-dismiss="alert">
-            <span class="svg-icon svg-icon-2x svg-icon-light">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                    <rect opacity="0.5" x="7.05025" y="15.5356" width="12" height="2" rx="1" transform="rotate(-45 7.05025 15.5356)" fill="black"/>
-                    <rect x="8.46447" y="7.05029" width="12" height="2" rx="1" transform="rotate(45 8.46447 7.05029)" fill="black"/>
-                </svg>
-            </span>
-        </button>
-    </div>
-    @endif
+@include('admin.templates.partials.head-alert')
 
     <div class="content flex-column-fluid" id="kt_content">
         <div class="card mb-5 mb-xl-10">
@@ -59,11 +39,28 @@
                             <div class="col-lg-8 fv-row">
                                 <select name="current_team_id" aria-label="" data-control="select2" data-placeholder="Pilih Role..." class="form-select form-select-solid form-select-lg fw-bold">
                                     @foreach ($datateam as $team)
-                                    @if ($team->id == $user->current_team_id)
-                                        <option selected value="{{$team->id}}">{{$team->name}} (Selected)</option>
-                                    @endif
-                                        <option value="{{$team->id}}">{{$team->name}}</option>
+                                        @if ($team->id == $user->current_team_id)
+                                            <option selected value="{{$team->id}}">{{$team->name}}</option>
+                                        @else
+                                            <option value="{{$team->id}}">{{$team->name}}</option>
+                                        @endif
                                     @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row mb-6">
+                            <label class="col-lg-4 col-form-label fw-bold fs-6">
+                                <span class="required">Status</span>
+                            </label>
+                            <div class="col-lg-8 fv-row">
+                                <select name="active" data-control="select2" data-placeholder="Pilih Status..." class="form-select form-select-solid form-select-lg fw-bold">
+                                    @if ($user->active == 1)
+                                        <option selected value="1">Active</option>
+                                        <option value="2">Inactive</option>
+                                    @else
+                                        <option value="1">Active</option>
+                                        <option selected value="2">Inactive</option>
+                                    @endif
                                 </select>
                             </div>
                         </div>

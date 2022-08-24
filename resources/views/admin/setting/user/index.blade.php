@@ -4,27 +4,7 @@
 
     <div class="content flex-column-fluid" id="kt_content">
 
-        @if ($errors->any())
-            <div class="alert alert-dismissible bg-danger d-flex flex-column flex-sm-row p-5">
-                <div class="d-flex flex-column text-light pe-0 pe-sm-10">
-                    <div class="row justify-content-md-center">
-                        <div class="col-lg-8 text-center">
-                            @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                        </div>
-                    </div>
-                </div>
-                <button type="button" class="position-absolute position-sm-relative m-2 m-sm-0 top-0 end-0 btn btn-icon ms-sm-auto" data-bs-dismiss="alert">
-                    <span class="svg-icon svg-icon-2x svg-icon-light">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                            <rect opacity="0.5" x="7.05025" y="15.5356" width="12" height="2" rx="1" transform="rotate(-45 7.05025 15.5356)" fill="black"/>
-                            <rect x="8.46447" y="7.05029" width="12" height="2" rx="1" transform="rotate(45 8.46447 7.05029)" fill="black"/>
-                        </svg>
-                    </span>
-                </button>
-            </div>
-        @endif
+        @include('admin.templates.partials.head-alert')
 
         <div class="card">
             <div class="card mb-5 mb-xl-8">
@@ -49,8 +29,10 @@
                             <thead>
                                 <tr class="fw-bolder text-muted">
                                     <th>No</th>
-                                    <th class="min-w-150px">Company</th>
-                                    <th>Progress</th>
+                                    <th>Nama</th>
+                                    <th>Email</th>
+                                    <th>Role</th>
+                                    <th>Status</th>
                                     <th>Actions</th>
                                 </tr>
                             </thead>
@@ -68,6 +50,10 @@
         @method("DELETE")
         <input type="submit" value="Hapus" class="btn btn-danger" style="display: none">
     </form>
+
+@endsection
+
+@section('styles')
 
 @endsection
 
@@ -89,13 +75,23 @@
                     {data:'DT_RowIndex', orderable: false, searchable: false},
                     {data:'name'},
                     {data:'email'},
+                    {data:'role'},
+                    {data:'status'},
                     {data:'action', responsivePriority: -1},
                 ],
                 columnDefs: [
-                    // {
-                    //     targets: -1,
-                    //     width: '150px',
-                    // },
+                    {
+                        targets: -1,
+                        width: '85px',
+                    },
+                    {
+                        targets: -2,
+                        className: "dt-center",
+                    },
+                    {
+                        targets: -3,
+                        className: "dt-center",
+                    },
                 ],
                 dom:
                 "<'row'" +

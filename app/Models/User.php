@@ -26,7 +26,7 @@ class User extends Authenticatable
      * @var string[]
      */
     protected $fillable = [
-        'name', 'email', 'password','current_team_id','profile_photo_path'
+        'name', 'email', 'password','current_team_id','profile_photo_path','active'
     ];
 
     /**
@@ -58,4 +58,5 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+
 }

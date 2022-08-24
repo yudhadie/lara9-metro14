@@ -50,7 +50,6 @@ class UserController extends Controller
         $data->name = $request->name;
         $data->email = $request->email;
         $data->password = bcrypt($request->password);
-        // $data->role_user_id = 1;
         $data->save();
         return redirect()->route('user.index')
                             ->with('success', 'Data user berhasil ditambahkan');
@@ -107,6 +106,7 @@ class UserController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'current_team_id' => $request->current_team_id,
+            'active' => $request->active,
             'profile_photo_path' => $photo,
         ]);
 

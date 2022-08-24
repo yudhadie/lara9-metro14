@@ -10,12 +10,22 @@ class DataController extends Controller
 {
     public function datauser()
     {
-        $datauser = User::orderBy('name','ASC');
+        $data = User::orderBy('name','asc')->get();
 
-        return datatables()->of($datauser)
+        return datatables()->of($data)
         ->addColumn('action', 'admin.setting.user.action')
         ->addIndexColumn()
-        ->rawColumns(['action'])
+        ->addColumn('role', function($data){
+            return $data->currentTeam->name;
+        })
+        ->addColumn('status', function($data){
+            if ($data->active == 1) {
+                return'<span class="text-success">Active</span>';
+            }else {
+                return'<span class="text-danger">Inactive</span>';
+            }
+        })
+        ->rawColumns(['action','status'])
         ->toJson();
     }
 }

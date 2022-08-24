@@ -22,5 +22,13 @@ class AdminUserSeeder extends Seeder
             'password' => bcrypt('admin123'),
             'current_team_id' => 1,
         ]);
+
+        User::create([
+            'id' => '2',
+            'name' => 'User',
+            'email' => 'user@user.com',
+            'password' => bcrypt('user123'),
+            'current_team_id' => 2,
+        ]);
     }
 }

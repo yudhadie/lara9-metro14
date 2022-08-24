@@ -21,5 +21,12 @@ class TeamSeeder extends Seeder
             'name' => 'ADMIN',
             'personal_team' => '1',
         ]);
+
+        Team::create([
+            'id' => 2,
+            'user_id' => '1',
+            'name' => 'USER',
+            'personal_team' => '1',
+        ]);
     }
 }
