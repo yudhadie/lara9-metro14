@@ -5,7 +5,9 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Team;
 use App\Models\User;
+use Diglactic\Breadcrumbs\Breadcrumbs;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
@@ -21,6 +23,7 @@ class UserController extends Controller
 
         return view('admin.setting.user.index',[
             'title' => 'Users',
+            'breadcrumbs' => Breadcrumbs::render('user'),
             'datateam' => $team,
         ]);
     }
@@ -79,8 +82,20 @@ class UserController extends Controller
 
         return view('admin.setting.user.edit',[
             'title' => 'Edit Users',
+            'breadcrumbs' => Breadcrumbs::render('user.edit',$user),
             'user' => $user,
             'datateam' => $team,
+        ]);
+    }
+
+    public function profile()
+    {
+        $user = User::find(Auth::user()->id);
+
+        return view('admin.setting.user.profile',[
+            'title' => 'Edit Users',
+            'breadcrumbs' => Breadcrumbs::render('profile'),
+            'user' => $user,
         ]);
     }
 
@@ -125,7 +140,26 @@ class UserController extends Controller
 
         return redirect()->route('user.index')
                             ->with('success', 'Data User berhasil diupdate');
+    }
 
+    public function updateprofile(Request $request)
+    {
+        $user = User::find(Auth::user()->id);
+
+        $photo = $user->profile_photo_path;
+
+        if ($request->hasFile('profile_photo_path')) {
+            $photo = $request->file('profile_photo_path')->store('uploads/user');
+        }
+
+        $user->update([
+            'name' => $request->name,
+            'email' => $request->email,
+            'profile_photo_path' => $photo,
+        ]);
+
+        return redirect()->route('dashboard')
+                            ->with('success', 'Data User berhasil diupdate');
     }
 
     /**

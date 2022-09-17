@@ -9,9 +9,15 @@ Breadcrumbs::for('dashboard', function (BreadcrumbTrail $trail) {
 });
 
 //Setting
+Breadcrumbs::for('profile', function (BreadcrumbTrail $trail) {
+    $trail->parent('dashboard');
+    $trail->push('Profile');
+});
+
+//Setting
 Breadcrumbs::for('setting', function (BreadcrumbTrail $trail) {
     $trail->parent('dashboard');
-    $trail->push('Setting');
+    $trail->push('Setting','#');
 });
 
     //User
@@ -19,7 +25,7 @@ Breadcrumbs::for('setting', function (BreadcrumbTrail $trail) {
         $trail->parent('setting');
         $trail->push('User', route('user.index'));
     });
-    Breadcrumbs::for('edituser', function (BreadcrumbTrail $trail, $user) {
+    Breadcrumbs::for('user.edit', function (BreadcrumbTrail $trail, $user) {
         $trail->parent('user');
-        $trail->push('Edit', route('user.edit', $user));
+        $trail->push($user->name);
     });

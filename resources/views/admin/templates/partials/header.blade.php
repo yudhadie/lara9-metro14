@@ -20,7 +20,7 @@
                     </div>
                     <div class="symbol symbol-30px symbol-md-40px">
                         @if (Auth::user()->profile_photo_path == null)
-                            <img alt="Logo" src="{{ asset( 'assets/media/avatars/default.jpg' ) }}" />
+                            <img alt="Logo" src="{{ asset( 'assets/media/avatars/default.svg' ) }}" />
                         @else
                             <img alt="Logo" src="{{ asset( Auth::user()->profile_photo_path ) }}" />
                         @endif
@@ -31,7 +31,7 @@
                         <div class="menu-content d-flex align-items-center px-3">
                             <div class="symbol symbol-50px me-5">
                                 @if (Auth::user()->profile_photo_path == null)
-                                    <img alt="Logo" src="{{ asset( 'assets/media/avatars/default.jpg' ) }}" />
+                                    <img alt="Logo" src="{{ asset( 'assets/media/avatars/default.svg' ) }}" />
                                 @else
                                     <img alt="Logo" src="{{ asset( Auth::user()->profile_photo_path ) }}" />
                                 @endif
@@ -47,7 +47,7 @@
                     <div class="separator my-2"></div>
 
                     <div class="menu-item px-5 my-1">
-                        <a href="{{route('user.edit',Auth::user()->id)}}" class="menu-link px-5">Account Settings</a>
+                        <a href="{{route('profile')}}" class="menu-link px-5">Account Settings</a>
                     </div>
                     <div class="menu-item px-5"
                         onclick="event.preventDefault();

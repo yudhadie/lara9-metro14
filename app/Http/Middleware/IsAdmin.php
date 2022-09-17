@@ -21,6 +21,6 @@ class IsAdmin
             return $next($request);
         }
 
-        return redirect()->route('error-admin');
+        return redirect()->route('error.admin');
     }
 }

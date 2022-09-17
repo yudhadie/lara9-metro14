@@ -10,6 +10,8 @@
 					<div class="d-flex flex-column-fluid">
                         @include('admin.templates.partials.sidebar')
 						<div class="d-flex flex-column flex-column-fluid container-fluid">
+                            @include('admin.templates.partials.breadcrumb')
+                            @include('admin.templates.partials.head-alert')
 
                                 @yield('content')
 

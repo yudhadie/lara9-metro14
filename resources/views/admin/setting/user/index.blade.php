@@ -2,18 +2,7 @@
 
 @section('content')
 
-    <div class="toolbar mb-5 mb-lg-7" id="kt_toolbar">
-        <div class="page-title d-flex flex-column me-3">
-            <h1 class="d-flex text-dark fw-bolder my-1 fs-3">{{$title ?? ''}}</h1>
-            {{ Breadcrumbs::render('user') }}
-        </div>
-    </div>
-
-
     <div class="content flex-column-fluid" id="kt_content">
-
-        @include('admin.templates.partials.head-alert')
-
         <div class="card">
             <div class="card mb-5 mb-xl-8">
                 <div class="card-header border-0 pt-5">
@@ -33,7 +22,7 @@
                 </div>
                 <div class="card-body py-3">
                     <div class="table-responsive">
-                        <table id="kt_datatable" class="table table-striped gy-5 gs-7 border rounded">
+                        <table id="kt_datatable" class="table align-middle table-striped gy-5 gs-7 border rounded">
                             <thead>
                                 <tr class="fw-bolder text-muted">
                                     <th>No</th>
@@ -68,9 +57,9 @@
 @push('scripts')
 
     <script>
-        var element = document.getElementById('menu_setting');
+        var element = document.getElementById('menu-setting');
             element.classList.add('show');
-        var element2 = document.getElementById('menu_user');
+        var element2 = document.getElementById('menu-setting-user');
             element2.classList.add('active');
     </script>
 
@@ -80,7 +69,6 @@
 
         var initTable1 = function() {
             var table = $('#kt_datatable');
-
             table.DataTable({
                 searchDelay: 500,
                 processing: true,
@@ -95,6 +83,11 @@
                     {data:'action', responsivePriority: -1},
                 ],
                 columnDefs: [
+                    {
+                        targets: 0,
+                        className: 'dt-center',
+                        width: '30px',
+                    },
                     {
                         targets: -1,
                         width: '85px',
@@ -193,11 +186,7 @@
                     if (status == 'Valid') {
                         submitButton.setAttribute('data-kt-indicator', 'on');
                         submitButton.disabled = true;
-                        setTimeout(function () {
-                            submitButton.removeAttribute('data-kt-indicator');
-                            submitButton.disabled = false;
-                            form.submit();
-                        }, 2000);
+                        form.submit();
                     }
                 });
             }

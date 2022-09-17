@@ -21,6 +21,6 @@ class IsActive
             return $next($request);
         }
 
-        return redirect()->route('error-active');
+        return redirect()->route('error.active');
     }
 }

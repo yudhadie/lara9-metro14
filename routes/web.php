@@ -2,7 +2,6 @@
 
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\DataController;
-use App\Http\Controllers\Admin\ErrorController;
 use App\Http\Controllers\Admin\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -18,15 +17,11 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
-})->name('welcome');
+    return view('coming-soon');
+})->name('home');
 
-Route::get('/user-not-active', function () {
-    return view('errors.active');
-})->name('user-not-active');
-
-Route::get('/error-active', [ErrorController::class, 'active'])->name('error-active');
-Route::get('/error-admin', [ErrorController::class, 'admin'])->name('error-admin');
+Route::get('/error-admin', function () { return view('errors.admin'); })->name('error.admin');
+Route::get('/error-active', function () { return view('errors.active'); })->name('error.active');
 
 Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified','active'])
     ->prefix('dashboard')
@@ -35,8 +30,13 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
     Route::middleware(['admin'])->group(function () {
         //Dashboard
         Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
-        Route::resource('/setting/user', UserController::class);
-        Route::put('/setting/user-reset/{user}', [UserController::class, 'updatepassword'])->name('user.reset');
+
+        //Setting
+            //User
+            Route::resource('/setting/user', UserController::class);
+            Route::get('/profile', [UserController::class, 'profile'])->name('profile');
+            Route::put('/profile', [UserController::class, 'updateprofile'])->name('profile.update');
+            Route::put('/setting/user-reset/{user}', [UserController::class, 'updatepassword'])->name('user.reset');
 
         //Table
         Route::get('/setting/data/user', [DataController::class, 'datauser'])->name('data.user');

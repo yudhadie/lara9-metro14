@@ -3,7 +3,7 @@
         <div class="hover-scroll-overlay-y my-5 pe-4 me-n4" id="kt_aside_menu_wrapper" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-height="auto" data-kt-scroll-dependencies="#kt_header, #kt_aside_footer" data-kt-scroll-wrappers="#kt_aside, #kt_aside_menu" data-kt-scroll-offset="{lg: '75px'}">
             <div class="menu menu-column menu-rounded fw-bold fs-6" id="#kt_aside_menu" data-kt-menu="true">
                 <div class="menu-item">
-                    <a id="menu_dashboard" class="menu-link">
+                    <a href="{{route('dashboard')}}" id="menu-dashboard" class="menu-link">
                         <span class="menu-icon">
                             <span class="svg-icon svg-icon-2">
                                 <span class="svg-icon svg-icon-2">
@@ -38,8 +38,7 @@
                         <span class="menu-title">Report</span>
                     </a>
                 </div>
-                {{-- <div data-kt-menu-trigger="click" class="menu-item show menu-accordion"> --}}
-                <div id="menu_setting"  data-kt-menu-trigger="click" class="menu-item menu-accordion">
+                <div id="menu-setting"  data-kt-menu-trigger="click" class="menu-item menu-accordion">
                     <span class="menu-link">
                         <span class="menu-icon">
                             <span class="svg-icon svg-icon-2">
@@ -54,7 +53,7 @@
                     </span>
                     <div class="menu-sub menu-sub-accordion menu-active-bg">
                         <div class="menu-item">
-                            <a id="menu_user" class="menu-link" href="{{ route('user.index') }}">
+                            <a class="menu-link" id="menu-setting-user" href="{{ route('user.index') }}">
                                 <span class="menu-bullet">
                                     <span class="bullet bullet-dot"></span>
                                 </span>
@@ -67,8 +66,6 @@
             </div>
         </div>
     </div>
-    <!--begin::Footer-->
     <div class="aside-footer flex-column-auto pt-5 pb-7 px-5" id="kt_aside_footer">
     </div>
-    <!--end::Footer-->
 </div>

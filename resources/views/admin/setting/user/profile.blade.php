@@ -10,7 +10,7 @@
                 </div>
             </div>
             <div id="kt_account_settings_profile_details" class="collapse show">
-                <form id="modal_form_form"  class="form" action="{{ route('user.update', $user) }}" method="post"enctype="multipart/form-data">
+                <form id="modal_form_form"  class="form" action="{{ route('profile.update') }}" method="post"enctype="multipart/form-data">
                     @csrf
                     @method("PUT")
                     <div class="card-body border-top p-9">
@@ -35,31 +35,7 @@
                                 <span class="required">Role</span>
                             </label>
                             <div class="col-lg-8 fv-row">
-                                <select name="current_team_id" aria-label="" data-control="select2" data-placeholder="Pilih Role..." class="form-select form-select-solid form-select-lg fw-bold">
-                                    @foreach ($datateam as $team)
-                                        @if ($team->id == $user->current_team_id)
-                                            <option selected value="{{$team->id}}">{{$team->name}}</option>
-                                        @else
-                                            <option value="{{$team->id}}">{{$team->name}}</option>
-                                        @endif
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
-                        <div class="row mb-6">
-                            <label class="col-lg-4 col-form-label fw-bold fs-6">
-                                <span class="required">Status</span>
-                            </label>
-                            <div class="col-lg-8 fv-row">
-                                <select name="active" data-control="select2" data-placeholder="Pilih Status..." class="form-select form-select-solid form-select-lg fw-bold">
-                                    @if ($user->active == 1)
-                                        <option selected value="1">Active</option>
-                                        <option value="2">Inactive</option>
-                                    @else
-                                        <option value="1">Active</option>
-                                        <option selected value="2">Inactive</option>
-                                    @endif
-                                </select>
+                                <input type="text" class="form-control form-control-lg form-control-solid" value="{{ $user->currentTeam->name }}" disabled/>
                             </div>
                         </div>
                         <div class="row mb-6">
@@ -75,7 +51,7 @@
                         </div>
                     </div>
                     <div class="card-footer d-flex justify-content-end py-6 px-9">
-                        <a class="btn btn-light btn-active-light-primary me-2" href="{{route('user.index')}}">Discard</a>
+                        <a class="btn btn-light btn-active-light-primary me-2" href="{{route('dashboard')}}">Discard</a>
                         <button type="submit" id="modal_form_submit" class="btn btn-primary">
                             <span class="indicator-label">Submit</span>
                             <span class="indicator-progress">Please wait...
@@ -124,10 +100,8 @@
 
 @push('scripts')
     <script>
-        var element = document.getElementById('menu-setting');
-            element.classList.add('show');
-        var element2 = document.getElementById('menu-setting-user');
-            element2.classList.add('active');
+        var element = document.getElementById('menu-dashboard');
+            element.classList.add('active');
     </script>
     <script>
         const form = document.getElementById('modal_form_form');
