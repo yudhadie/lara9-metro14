@@ -23,6 +23,7 @@ class UserController extends Controller
 
         return view('admin.setting.user.index',[
             'title' => 'Users',
+            'subtitle' => 'Users yang bisa login aplikasi',
             'breadcrumbs' => Breadcrumbs::render('user'),
             'datateam' => $team,
         ]);
@@ -82,6 +83,7 @@ class UserController extends Controller
 
         return view('admin.setting.user.edit',[
             'title' => 'Edit Users',
+            'subtitle' => 'Edit users yang bisa login aplikasi',
             'breadcrumbs' => Breadcrumbs::render('user.edit',$user),
             'user' => $user,
             'datateam' => $team,
@@ -93,7 +95,8 @@ class UserController extends Controller
         $user = User::find(Auth::user()->id);
 
         return view('admin.setting.user.profile',[
-            'title' => 'Edit Users',
+            'title' => 'Profile',
+            'subtitle' => 'Detail Profile',
             'breadcrumbs' => Breadcrumbs::render('profile'),
             'user' => $user,
         ]);

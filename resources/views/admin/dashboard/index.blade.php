@@ -3,19 +3,20 @@
 @section('content')
 
     <div class="content flex-column-fluid" id="kt_content">
-        <div class="card">
-            <div class="card-body p-5 px-lg-19 py-lg-16">
-                <div class="mb-15">
-                    <h1 class="fs-2x text-dark mb-6">Dashboard</h1>
-                    <div class="fs-5 text-muted fw-bold">
-                        test
-                    </div>
-                </div>
-                <div class="row g-10 mb-15">
 
+        <div class="row">
+            <div class="col-lg-5 mb-5 mb-lg-10">
+                <div class="card h-150px bgi-no-repeat bgi-size-cover h-150px mb-5 mb-lg-10" style="background-image:url({{asset('assets/media/bg-dashboard.jpg')}})">
+                    <div class="card-body p-6">
+                        <div class="text-black text-hover-primary fw-bolder fs-2">
+                            Selamat Datang, <br>
+                            {{Auth::user()->name}}
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
+
     </div>
 
 @endsection

@@ -7,7 +7,8 @@
             <div class="card mb-5 mb-xl-8">
                 <div class="card-header border-0 pt-5">
                     <h3 class="card-title align-items-start flex-column">
-                        <span class="card-label fw-bolder fs-3 mb-1">Data {{$tittle ?? ''}}</span>
+                        <span class="card-label fw-bolder fs-3 mb-1">{{$title}}</span>
+                        <span class="text-muted mt-1 fw-bold fs-7">{{$subtitle ?? ''}}</span>
                     </h3>
                     <div class="card-toolbar" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-trigger="hover" title="Click to add a user">
                         <a href="#" class="btn btn-sm btn-light btn-active-primary" data-bs-toggle="modal" data-bs-target="#modal-form">
@@ -17,7 +18,7 @@
                                 <rect x="4.36396" y="11.364" width="16" height="2" rx="1" fill="black" />
                             </svg>
                         </span>
-                        New {{$tittle ?? ''}}</a>
+                        New {{$title ?? ''}}</a>
                     </div>
                 </div>
                 <div class="card-body py-3">
