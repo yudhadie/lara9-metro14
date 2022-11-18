@@ -10,16 +10,6 @@
                         <span class="card-label fw-bolder fs-3 mb-1">{{$title}}</span>
                         <span class="text-muted mt-1 fw-bold fs-7">{{$subtitle ?? ''}}</span>
                     </h3>
-                    <div class="card-toolbar" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-trigger="hover" title="Click to add a user">
-                        <a href="#" class="btn btn-sm btn-light btn-active-primary" data-bs-toggle="modal" data-bs-target="#modal-form">
-                        <span class="svg-icon svg-icon-3">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                <rect opacity="0.5" x="11.364" y="20.364" width="16" height="2" rx="1" transform="rotate(-90 11.364 20.364)" fill="black" />
-                                <rect x="4.36396" y="11.364" width="16" height="2" rx="1" fill="black" />
-                            </svg>
-                        </span>
-                        New {{$title ?? ''}}</a>
-                    </div>
                 </div>
                 <div class="card-body py-3">
                     <div class="table-responsive">
@@ -27,10 +17,10 @@
                             <thead>
                                 <tr class="fw-bolder text-muted">
                                     <th>No</th>
-                                    <th>Nama</th>
-                                    <th>Email</th>
-                                    <th>Role</th>
-                                    <th>Status</th>
+                                    <th>Data</th>
+                                    <th>Activity</th>
+                                    <th>User</th>
+                                    <th>Time</th>
                                     <th>Actions</th>
                                 </tr>
                             </thead>
@@ -41,26 +31,14 @@
         </div>
     </div>
 
-    @include('admin.setting.user.modal')
-
-    <form action="" method="post" id="deleteForm">
-        @csrf
-        @method("DELETE")
-        <input type="submit" value="Hapus" class="btn btn-danger" style="display: none">
-    </form>
-
-@endsection
-
-@section('styles')
-
 @endsection
 
 @push('scripts')
 
     <script>
-        var element = document.getElementById('menu-setting');
+        var element = document.getElementById('menu-info');
             element.classList.add('show');
-        var element2 = document.getElementById('menu-setting-user');
+        var element2 = document.getElementById('menu-info-activity');
             element2.classList.add('active');
     </script>
 
@@ -74,14 +52,14 @@
                 searchDelay: 500,
                 processing: true,
                 serverSide: true,
-                ajax: '{{ route('data.user') }}',
+                ajax: '{{ route('data.activity') }}',
                 columns: [
                     {data:'DT_RowIndex', orderable: false, searchable: false},
-                    {data:'name'},
-                    {data:'email'},
-                    {data:'role'},
-                    {data:'status'},
-                    {data:'action', responsivePriority: -1},
+                    {data:'data'},
+                    {data:'events'},
+                    {data:'user'},
+                    {data:'time'},
+                    {data:'action', responsivePriority: -1, orderable: false, searchable: false},
                 ],
                 columnDefs: [
                     {
@@ -90,7 +68,7 @@
                         width: '30px',
                     },
                     {
-                        targets: [3,4,5],
+                        targets: [2,3,4,5],
                         className: "dt-center",
                     },
                 ],

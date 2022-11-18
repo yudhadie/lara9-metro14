@@ -10,15 +10,20 @@ use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Jetstream\HasTeams;
 use Laravel\Sanctum\HasApiTokens;
+use Spatie\Activitylog\LogOptions;
+use Spatie\Activitylog\Traits\LogsActivity;
 
 class User extends Authenticatable
 {
+    use LogsActivity;
     use HasApiTokens;
     use HasFactory;
     use HasProfilePhoto;
     use HasTeams;
     use Notifiable;
     use TwoFactorAuthenticatable;
+
+
 
     /**
      * The attributes that are mass assignable.
@@ -28,6 +33,15 @@ class User extends Authenticatable
     protected $fillable = [
         'name', 'email', 'password','current_team_id','profile_photo_path','active'
     ];
+
+    public function getActivitylogOptions(): LogOptions
+    {
+        return LogOptions::defaults()
+            ->useLogName('Users')
+            ->logOnly([
+                'name', 'email','current_team_id','active'
+            ]);
+    }
 
     /**
      * The attributes that should be hidden for serialization.
@@ -58,5 +72,7 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+
+
 
 }

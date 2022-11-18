@@ -1,5 +1,9 @@
 <head>
-    <title>yudhadie</title>
+    @empty($title)
+        <title>yudhadie</title>
+    @else
+        <title>{{$title.' - yudhadie'}}</title>
+    @endempty
     <meta charset="utf-8" />
     <meta name="description" content="yudhadie application" />
     <meta name="keywords" content="" />

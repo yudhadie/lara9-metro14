@@ -55,8 +55,9 @@ class UserController extends Controller
         $data->email = $request->email;
         $data->password = bcrypt($request->password);
         $data->save();
-        return redirect()->route('user.index')
-                            ->with('success', 'Data user berhasil ditambahkan');
+
+        // activity()->log('Tambah User '.$request->name);
+        return redirect()->route('user.index')->with('success', 'Data user berhasil ditambahkan');
     }
 
     /**
@@ -111,9 +112,11 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // $user->update($request->all());
-        $user = User::find($id);
+        $request->validate([
+            'email' => 'required|unique:users,email,'.$id,
+        ]);
 
+        $user = User::find($id);
         $photo = $user->profile_photo_path;
 
         if ($request->hasFile('profile_photo_path')) {

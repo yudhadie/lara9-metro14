@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Activity;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class DataController extends Controller
@@ -26,6 +28,35 @@ class DataController extends Controller
             }
         })
         ->rawColumns(['action','status'])
+        ->toJson();
+    }
+
+    public function dataactivity()
+    {
+        $data = Activity::latest();
+
+        return datatables()->of($data)
+        ->addColumn('action', 'admin.information.activity.action')
+        ->addIndexColumn()
+        ->addColumn('user', function($data){
+            return $data->user->name;
+        })
+        ->addColumn('time', function($data){
+            return Carbon::parse($data->created_at)->diffForHumans();
+        })
+        ->addColumn('data', function($data){
+            return $data->log_name.' ('.$data->subject_id.')';
+        })
+        ->addColumn('events', function($data){
+            if ($data->event == 'created') {
+                return'<span class="badge badge-light-success fs-8 fw-bolder">Created</span>';
+            }  elseif ($data->event == 'updated') {
+                return'<span class="badge badge-light-warning fs-8 fw-bolder">Updated</span>';
+            } else {
+                return'<span class="badge badge-light-danger fs-8 fw-bolder">Deleted</span>';
+            }
+        })
+        ->rawColumns(['action','events'])
         ->toJson();
     }
 }

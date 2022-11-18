@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\DataController;
+use App\Http\Controllers\Admin\Information\ActivityController;
 use App\Http\Controllers\Admin\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -38,8 +39,13 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
             Route::put('/profile', [UserController::class, 'updateprofile'])->name('profile.update');
             Route::put('/setting/user-reset/{user}', [UserController::class, 'updatepassword'])->name('user.reset');
 
+        //Information
+            //Activity
+            Route::resource('/information/activity', ActivityController::class);
+
         //Table
         Route::get('/setting/data/user', [DataController::class, 'datauser'])->name('data.user');
+        Route::get('/information/data/activity', [DataController::class, 'dataactivity'])->name('data.activity');
     });
 
 });
